@@ -1,0 +1,57 @@
+[package]
+name = "esp32-cam-rs"
+version = "0.1.0"
+authors = ["Jorge Andre Castro <georgeandrec@gmail.com>"]
+edition = "2024"
+rust-version = "1.85"
+description = "Safe Rust wrapper around Espressif's esp32-camera driver for the ESP32-CAM (AI-Thinker, OV2640) on top of esp-idf-svc."
+documentation = "https://docs.rs/esp32-cam-rs"
+homepage = "https://github.com/jorgeandrecastro/esp32-cam-rs"
+repository = "https://github.com/jorgeandrecastro/esp32-cam-rs"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["esp32", "esp32-cam", "camera", "esp-idf", "embedded"]
+categories = ["embedded", "hardware-support", "multimedia::images"]
+include = [
+    "src/**/*",
+    "examples/**/*",
+    "build.rs",
+    "bindings.h",
+    "README.md",
+    "README.fr.md",
+    "CHANGELOG.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE",
+    "Cargo.toml",
+]
+
+[lib]
+name = "esp32_cam_rs"
+harness = false # no built-in cargo test harness on ESP targets
+
+[dependencies]
+esp-idf-svc = { version = "0.53", features = ["critical-section"] }
+log = "0.4"
+
+[dev-dependencies]
+anyhow = "1"
+
+[build-dependencies]
+embuild = "0.33"
+
+# Development only: needed to build against ESP-IDF 6.x.
+# Ignored by crates depending on esp32-cam-rs (patches only apply to the root crate).
+[patch.crates-io]
+esp-idf-sys = { git = "https://github.com/esp-rs/esp-idf.git" }
+esp-idf-hal = { git = "https://github.com/esp-rs/esp-idf.git" }
+esp-idf-svc = { git = "https://github.com/esp-rs/esp-idf.git" }
+
+# Pulls Espressif's `esp32-camera` component (Apache-2.0) into the ESP-IDF build
+# and exposes its bindings as `esp_idf_svc::sys::camera`.
+[[package.metadata.esp-idf-sys.extra_components]]
+remote_component = { name = "espressif/esp32-camera", version = "^2.0" }
+bindings_header = "bindings.h"
+bindings_module = "camera"
+
+# docs.rs cannot build ESP-IDF projects: build the docs locally with `cargo doc`.

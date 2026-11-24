@@ -1,0 +1,15 @@
+[build]
+target = "xtensa-esp32-espidf"
+
+[target.xtensa-esp32-espidf]
+linker = "ldproxy"
+runner = "espflash flash --monitor"
+rustflags = ["--cfg", "espidf_time64"]
+
+[unstable]
+build-std = ["std", "panic_abort"]
+
+[env]
+MCU = "esp32"
+# No ESP_IDF_VERSION on purpose: the git esp-idf-sys picks its default (ESP-IDF 6.x),
+# like in the working esp32cam project. If that project pins a version, copy it here.

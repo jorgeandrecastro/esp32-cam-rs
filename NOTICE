@@ -1,0 +1,35 @@
+esp32-cam-rs
+Copyright 2026 Jorge Andre Castro
+
+This product is dual-licensed under MIT or Apache-2.0 (see LICENSE-MIT and
+LICENSE-APACHE).
+
+Third-party software
+--------------------
+
+This crate does not copy third-party source code into its repository, but it
+downloads, builds against and links the following components. Their licences
+apply to the resulting firmware binaries:
+
+* espressif/esp32-camera (ESP32 camera driver)
+  https://github.com/espressif/esp32-camera
+  Copyright Espressif Systems (Shanghai) CO LTD
+  Licensed under the Apache License, Version 2.0.
+  Fetched at build time through the ESP-IDF component manager.
+
+* ESP-IDF
+  https://github.com/espressif/esp-idf
+  Copyright Espressif Systems (Shanghai) CO LTD
+  Licensed under the Apache License, Version 2.0.
+
+* esp-idf-svc / esp-idf-sys / esp-idf-hal
+  https://github.com/esp-rs/esp-idf-svc
+  Licensed under MIT OR Apache-2.0.
+
+* embuild
+  https://github.com/ivmarkov/embuild
+  Licensed under MIT OR Apache-2.0.
+
+* log
+  https://github.com/rust-lang/log
+  Licensed under MIT OR Apache-2.0.
